@@ -1,38 +1,154 @@
-.App {
+*,
+*::before,
+*:after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-card-main: hsl(0, 82%, 35%);
+  --color-card-secondary: hsl(54, 100%, 56%);
+  --color-main-bg: #e77728;
+
+  --card-height: 350px;
+  --card-width: 250px;
+}
+
+#root {
+  width: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--color-main-bg);
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  height: fit-content;
+  padding: 2rem 2rem;
+
+  background-color: var(--color-card-main);
+  color: var(--color-card-secondary);
+}
+
+.nav__bar {
+  display: flex;
+  height: 100%;
+}
+
+.nav__bar button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 120px;
+  padding: 1rem 0.5rem;
+  cursor: pointer;
+  background-color: inherit;
+  color: inherit;
+  border: none;
+  outline: none;
+}
+
+.nav__bar button:hover {
+  background-color: var(--color-card-secondary);
+  color: var(--color-card-main);
+}
+
+/* Main */
+.main {
+  height: 100%;
+  width: 100%;
+  padding: 3rem 0;
+}
+
+.cards__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 100%;
+
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.flashCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--card-width);
+  height: var(--card-height);
+  border-radius: 0.7rem;
+
+  font-size: 1.5rem;
+  user-select: none;
+
+  position: relative;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease-in-out;
+
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.flashCard:hover {
+  transform: rotateY(180deg);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.flashCard__front,
+.flashCard__back {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  padding: 1.5rem;
+  position: absolute;
+  border-radius: 0.7rem;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
 }
 
-.App-link {
-  color: #61dafb;
+.flashCard__front {
+  background-color: var(--color-card-main);
+  color: var(--color-card-secondary);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.flashCard__back {
+  background-color: var(--color-card-secondary);
+  color: var(--color-card-main);
+  transform: rotateY(180deg);
+  z-index: 2;
+}
+
+.add__btn {
+  font-size: 5rem;
+  background-color: var(--color-card-secondary);
+  color: var(--color-card-main);
+  width: var(--card-width);
+  height: var(--card-height);
+  border: none;
+  border-radius: 0.7rem;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+
+  cursor: pointer;
+}
+
+.add__btn:hover {
+  background-color: var(--color-card-main);
+  color: var(--color-card-secondary);
+}
+
+.form {
+  width: 100%;
+  height: 100%;
 }
