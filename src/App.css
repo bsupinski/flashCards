@@ -9,7 +9,7 @@
 :root {
   --color-card-main: hsl(0, 82%, 35%);
   --color-card-secondary: hsl(54, 100%, 56%);
-  --color-main-bg: #e77728;
+  --color-main-bg: hsla(0, 92%, 45%, 0);
 
   --card-height: 350px;
   --card-width: 250px;
@@ -36,6 +36,8 @@ header {
   height: 6rem;
   padding: 0 0 0 2rem;
 
+  user-select: none;
+
   background-color: var(--color-card-main);
   color: var(--color-card-secondary);
 }
@@ -44,6 +46,25 @@ header {
   display: flex;
   flex-direction: row;
   height: 100%;
+}
+
+.nav__bar button {
+  background-color: var(--color-card-main);
+  color: var(--color-card-secondary);
+  width: 7rem;
+  padding: 0 1rem;
+  height: 100%;
+
+  border: none;
+  outline: none;
+
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+
+.nav__bar button:hover {
+  background-color: var(--color-card-secondary);
+  color: var(--color-card-main);
 }
 
 .subnav {
@@ -60,6 +81,10 @@ header {
   flex-direction: column;
   position: absolute;
   width: 100%;
+}
+
+.subnav:hover .dropdown--item {
+  height: 2rem;
 }
 
 .subnav:hover .dropdown {

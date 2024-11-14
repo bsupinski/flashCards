@@ -1,4 +1,4 @@
-export default function NewCardForm({ onSetNewCard, addCard }) {
+export default function NewCardForm({ addCard }) {
   return (
     <form className="form" onSubmit={(e) => addCard(e)}>
       <div className="module">

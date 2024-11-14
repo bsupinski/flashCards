@@ -1,35 +1,81 @@
-import { useState } from "react";
+import { React, useState } from "react";
 import Header from "./Header";
 import Main from "./Main";
 
-const flashCards = {
-  list: [
-    { question: " What am I working with?", answer: "react", id: 1 },
-    { question: "What styles your elements?", answer: "Css", id: 2 },
-    {
-      question: "What does react use to create elements?",
-      answer: "JSX",
-      id: 3,
-    },
-  ],
-  list2: [
-    { question: "This is test", answer: "test", id: 1 },
-    { question: "This is test2", answer: "Test2", id: 2 },
-    {
-      question: "What does react use to create elements?",
-      answer: "JSX",
-      id: 3,
-    },
-  ],
-};
+const flashCards = [
+  {
+    name: "list",
+    questions: [
+      { question: "1 + 1", answer: "2", id: Math.random() },
+      { question: " 1 + 2", answer: "3", id: Math.random() },
+      { question: " 1 + 3", answer: "4", id: Math.random() },
+      { question: "1 + 4", answer: "5", id: Math.random() },
+    ],
+  },
+  {
+    name: "list2",
+    questions: [
+      { question: "1 x 1", answer: "1", id: Math.random() },
+      { question: " 1 x 2", answer: "2", id: Math.random() },
+      { question: " 1 x 3", answer: "3", id: Math.random() },
+      { question: "1 x 4", answer: "4", id: Math.random() },
+    ],
+  },
+];
 
 export default function FlashCards() {
   const [flashCardLists, setFlashCardLists] = useState(flashCards);
-  const [activeFlashCards, setActiveFlashCards] = useState(flashCardLists.list);
+  const [activeFlashCards, setActiveFlashCards] = useState(flashCardLists[0]);
+  const [toggleCardModel, setToggleCardModel] = useState(false);
+  const [toggleListModel, setToggleListModel] = useState(false);
 
-  function handleSetActiveFlashCards(name) {
-    setActiveFlashCards(flashCardLists[name]);
-    console.log(flashCardLists[name]);
+  function handleToggleCardModel() {
+    setToggleCardModel((s) => !s);
+  }
+
+  function handleToggleListModel() {
+    setToggleListModel((s) => !s);
+  }
+
+  function handleSetActiveFlashCards(e) {
+    const selectedList = flashCardLists.find(
+      (list) => list.name === e.target.innerText
+    );
+    setActiveFlashCards(selectedList);
+  }
+
+  function addList(e) {
+    e.preventDefault();
+    const newList = {
+      name: e.target.listName.value,
+      questions: [],
+    };
+    setFlashCardLists([...flashCardLists, newList]);
+    handleToggleListModel();
+  }
+
+  function addCard(e) {
+    e.preventDefault();
+
+    const newCard = {
+      question: e.target.question.value,
+      answer: e.target.answer.value,
+      id: Date.now(),
+    };
+
+    const upDatedCards = {
+      ...activeFlashCards,
+      questions: [...activeFlashCards.questions, newCard],
+    };
+
+    setFlashCardLists(
+      flashCardLists.map((list) =>
+        list.name === activeFlashCards.name ? upDatedCards : list
+      )
+    );
+
+    setActiveFlashCards(upDatedCards);
+    handleToggleCardModel();
   }
 
   return (
@@ -38,7 +84,15 @@ export default function FlashCards() {
         flashCardLists={flashCardLists}
         handleSetActiveFlashCards={handleSetActiveFlashCards}
       />
-      <Main activeFlashCards={activeFlashCards} />
+      <Main
+        activeFlashCards={activeFlashCards}
+        addCard={addCard}
+        toggleCardModel={toggleCardModel}
+        onToggleCardModel={handleToggleCardModel}
+        toggleListModel={toggleListModel}
+        onToggleListModel={handleToggleListModel}
+        addList={addList}
+      />
     </>
   );
 }

@@ -1,29 +1,25 @@
-import { useState } from "react";
+import React from "react";
 import CardWrapper from "./CardWrapper";
 import NewCardForm from "./NewCardForm";
+import NewListForm from "./NewListForm";
 
-export default function Main({ activeFlashCards }) {
-  const [toggleCardModel, setToggleCardModel] = useState(false);
-  function handleToggleCardModel() {
-    setToggleCardModel((s) => !s);
-  }
-
-  function addCard(e) {
-    e.preventDefault();
-    const question = e.target.question.value;
-    const answer = e.target.answer.value;
-    console.log(question, answer);
-
-    // handleToggleCardModel();
-  }
-
+export default function Main({
+  activeFlashCards,
+  addCard,
+  toggleCardModel,
+  onToggleCardModel,
+  onToggleListModel,
+  addList,
+}) {
   return (
     <div className="main">
       {toggleCardModel ? (
-        <NewCardForm onSetNewCard={handleToggleCardModel} addCard={addCard} />
+        <NewCardForm addCard={addCard} />
+      ) : toggleCardModel ? (
+        <NewListForm addList={addList} />
       ) : (
         <CardWrapper
-          onToggleCardModel={handleToggleCardModel}
+          onToggleCardModel={onToggleCardModel}
           activeFlashCards={activeFlashCards}
         />
       )}

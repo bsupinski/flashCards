@@ -1,4 +1,8 @@
-export default function Header({ flashCardLists, handleSetActiveFlashCards }) {
+export default function Header({
+  flashCardLists,
+  handleSetActiveFlashCards,
+  onToggleListModel,
+}) {
   return (
     <header>
       <div className="logo__container">
@@ -8,18 +12,18 @@ export default function Header({ flashCardLists, handleSetActiveFlashCards }) {
         <div className="subnav">
           <button>Select Set</button>
           <div className="dropdown">
-            {Object.keys(flashCardLists).map((listName) => (
+            {flashCardLists.map((card) => (
               <button
                 className="dropdown--item"
                 key={Math.random()}
-                onClick={(e) => handleSetActiveFlashCards(e.target.textContent)}
+                onClick={(e) => handleSetActiveFlashCards(e)}
               >
-                {listName}
+                {card.name}
               </button>
             ))}
           </div>
         </div>
-        <button>Create New</button>
+        <button onClick={onToggleListModel}>Create New</button>
       </div>
     </header>
   );
