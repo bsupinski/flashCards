@@ -1,14 +1,8 @@
 import "./App.css";
-import Header from "./Header";
-import Main from "./Main";
+import FlashCards from "./Components/FlashCards.jsx";
 
 function App() {
-  return (
-    <>
-      <Header></Header>
-      <Main></Main>
-    </>
-  );
+  return <FlashCards />;
 }
 
 export default App;
