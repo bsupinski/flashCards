@@ -9,13 +9,14 @@ export default function Main({
   toggleCardModel,
   onToggleCardModel,
   onToggleListModel,
+  toggleListModel,
   addList,
 }) {
   return (
     <div className="main">
       {toggleCardModel ? (
         <NewCardForm addCard={addCard} />
-      ) : toggleCardModel ? (
+      ) : toggleListModel ? (
         <NewListForm addList={addList} />
       ) : (
         <CardWrapper

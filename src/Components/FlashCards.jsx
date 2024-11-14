@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import Header from "./Header";
 import Main from "./Main";
 
@@ -83,6 +83,7 @@ export default function FlashCards() {
       <Header
         flashCardLists={flashCardLists}
         handleSetActiveFlashCards={handleSetActiveFlashCards}
+        onToggleListModel={handleToggleListModel}
       />
       <Main
         activeFlashCards={activeFlashCards}
@@ -90,7 +91,6 @@ export default function FlashCards() {
         toggleCardModel={toggleCardModel}
         onToggleCardModel={handleToggleCardModel}
         toggleListModel={toggleListModel}
-        onToggleListModel={handleToggleListModel}
         addList={addList}
       />
     </>
